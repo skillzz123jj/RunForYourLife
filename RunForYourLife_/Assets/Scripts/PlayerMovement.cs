@@ -1,3 +1,6 @@
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +12,27 @@ public class PlayerMovement : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 1;
+    private InputAction movementAction;
+    private InputAction jumpAction;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        movementAction = new InputAction();
+        movementAction.AddBinding("<Gamepad>/leftStick");
+        movementAction.Enable();
+        movementAction.performed += Move;
+
+        jumpAction = new InputAction();
+        jumpAction.AddBinding("<Keyboard>/space");
+        jumpAction.Enable();
+        jumpAction.started += Jump;
     }
 
-    private void OnMove(InputValue movementValue)
+    void Move(InputAction.CallbackContext context)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = context.ReadValue<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
@@ -26,5 +41,16 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
+    }
+
+    void Jump(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Jump!");
+            // Add your jump code here
+            // For example, you can apply a vertical force to a Rigidbody component
+            // or change a bool variable to trigger a jump animation
+        }
     }
 }
