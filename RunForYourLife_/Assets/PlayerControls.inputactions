@@ -1,5 +1,5 @@
 {
-    "name": "Inputs",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",
@@ -281,6 +281,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5fc2290-d8d0-48d8-838d-e1ef11387bbd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false

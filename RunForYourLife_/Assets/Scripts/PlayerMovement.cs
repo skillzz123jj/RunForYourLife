@@ -1,6 +1,3 @@
-
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,8 +21,10 @@ public class PlayerMovement : MonoBehaviour
         movementAction.Enable();
         movementAction.performed += Move;
 
+
         jumpAction = new InputAction();
         jumpAction.AddBinding("<Keyboard>/space");
+        jumpAction.AddBinding("<Gamepad>/buttonSouth");
         jumpAction.Enable();
         jumpAction.started += Jump;
     }
@@ -33,6 +32,12 @@ public class PlayerMovement : MonoBehaviour
     void Move(InputAction.CallbackContext context)
     {
         Vector2 movementVector = context.ReadValue<Vector2>();
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+    }
+    private void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
@@ -54,3 +59,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+
+
