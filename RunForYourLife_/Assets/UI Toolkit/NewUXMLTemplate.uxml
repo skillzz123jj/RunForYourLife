@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="height: 72px;">
+        <ui:IMGUIContainer style="background-image: url(&apos;project://database/Assets/Materials/10-105867_crash-bandicoot-wumpa-fruit-png-transparent-png.png?fileID=2800000&amp;guid=27342d6e2e263ae4da543a01ec2fc13a&amp;type=3#10-105867_crash-bandicoot-wumpa-fruit-png-transparent-png&apos;); height: 35px; width: 41px; -unity-background-scale-mode: scale-and-crop;">
+            <ui:Label text="Label" display-tooltip-when-elided="true" style="align-items: flex-end; justify-content: space-around; width: 153px;" />
+        </ui:IMGUIContainer>
+    </ui:VisualElement>
+</ui:UXML>
