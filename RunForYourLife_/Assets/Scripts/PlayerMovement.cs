@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 1;
+    public float jumpForce;
     private InputAction movementAction;
     private InputAction jumpAction;
 
@@ -27,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         jumpAction.AddBinding("<Gamepad>/buttonSouth");
         jumpAction.Enable();
         jumpAction.started += Jump;
+
+        rb.drag = 5f; // Adjust this value to control the linear drag
+        rb.angularDrag = 5f;
+
+
     }
 
     void Move(InputAction.CallbackContext context)
@@ -44,14 +50,26 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        //Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        //rb.AddForce(movement * speed);
+
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * speed;
+        rb.AddForce(movement, ForceMode.Acceleration);
+
+       
+
+
     }
 
     void Jump(InputAction.CallbackContext context)
     {
         if (context.started)
         {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             Debug.Log("Jump!");
             // Add your jump code here
             // For example, you can apply a vertical force to a Rigidbody component
