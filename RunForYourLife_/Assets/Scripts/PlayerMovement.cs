@@ -19,19 +19,23 @@ public class PlayerMovement : MonoBehaviour
     public float fruitCollected;
     public TMP_Text fruitCollectedText;
     public bool isGrounded = false;
-    public bool collisionHappened;
+    public bool hasJumped;
+
+    Animator animations;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
+        animations = GetComponent<Animator>();
+
         
-        jumpAction = new InputAction();
-        jumpAction.AddBinding("<Keyboard>/space");
-        jumpAction.AddBinding("<Gamepad>/buttonSouth");
-        jumpAction.Enable();
-        jumpAction.started += Jump;
+        // jumpAction = new InputAction();
+        // jumpAction.AddBinding("<Keyboard>/space");
+        // jumpAction.AddBinding("<Gamepad>/buttonSouth");
+        // jumpAction.Enable();
+        // //jumpAction.started += Jump;
 
         rb.drag = 5f; 
         rb.angularDrag = 5f;
@@ -55,28 +59,69 @@ public class PlayerMovement : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
-
-
-    }
-
-    void Jump(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        if (Input.GetAxis("Horizontal") != 0|| Input.GetAxis("Vertical") != 0)
         {
-            if (isGrounded)                    
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                Debug.Log("Jump!");
-                isGrounded= false;
-                // Add your jump code here
-                // For example, you can apply a vertical force to a Rigidbody component
-                // or change a bool variable to trigger a jump animation
-
-            }
-           
+            animations.SetBool("Walk", true);
 
         }
+        else
+        {
+            animations.SetBool("Walk", false);
+        }
+        Jump();
+
+
     }
+    void Jump()
+    {
+        if (Input.GetKey(KeyCode.Space) &&  isGrounded)
+        {
+
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            Debug.Log("Jump!");
+            animations.SetBool("Jump", true);
+            isGrounded = false;
+            //hasJumped = true;
+            // Add your jump code here
+            // For example, you can apply a vertical force to a Rigidbody component
+            // or change a bool variable to trigger a jump animation
+
+        }
+        else
+        {
+            animations.SetBool("Jump", false);
+            // hasJumped = false;
+        }
+
+    }
+
+    // void Jump(InputAction.CallbackContext context)
+    // {
+    //     if (context.started)
+    //     {
+    //         if (isGrounded && !hasJumped)                    
+    //         {
+    //             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    //             Debug.Log("Jump!");
+    //               animations.SetBool("Jump", true);
+    //             isGrounded= false;   
+    //             hasJumped = true;
+    //             // Add your jump code here
+    //             // For example, you can apply a vertical force to a Rigidbody component
+    //             // or change a bool variable to trigger a jump animation
+
+    //         }
+    //          else
+    //         {
+    //             animations.SetBool("Jump", false);
+    //         hasJumped = false;
+    //     }
+    // }
+           
+
+
+    //     }
+        
     private void OnTriggerEnter(Collider other)
     {
         //if (collisionHappened)
@@ -92,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             print("collected");
             fruitCollected++;
             fruitCollectedText.text = fruitCollected.ToString();
-            collisionHappened = true;
+            //collisionHappened = true;
             
             
 
