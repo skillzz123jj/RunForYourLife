@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    // Start is called before the first frame update
+        public float speed;
+    [SerializeField] GameObject playerMovement;
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerMovement.GetComponent<PlayerMovement>().enabled = false;
+            
+        }
         
     }
+
 }
