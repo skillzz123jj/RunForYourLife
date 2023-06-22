@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     public TMP_Text fruitCollectedText;
     public bool isGrounded = false;
     public bool hasJumped;
+    public bool playerHasLives = true;
+    public bool playerIsDead = false;
+    public bool playerHasNoMoreLives = false;
+
+    public CheckPoint checkPointScript;
 
     Animator animations;
 
@@ -42,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+
 
     void Update()
     {
@@ -69,6 +76,12 @@ public class PlayerMovement : MonoBehaviour
             animations.SetBool("Walk", false);
         }
         Jump();
+
+        if (Input.GetKey(KeyCode.U))
+        {
+            playerIsDead= true;
+        }
+        
 
 
     }
