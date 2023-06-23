@@ -9,12 +9,12 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] GameObject checkPoint2;
     public Vector3 spawnPoint;
     public Rock rockScript;
-    public PlayerMovement playerMovementScipt;
+    public PlayerMovement playerMovementScript;
 
     private void Start()
     {
         rockScript.GetComponent<Rock>();
-        playerMovementScipt.GetComponent<PlayerMovement>();
+        playerMovementScript.GetComponent<PlayerMovement>();
 
         spawnPoint = gameObject.transform.position;
         
@@ -27,9 +27,13 @@ public class CheckPoint : MonoBehaviour
         //    spawnPoint = checkPoint1.transform.position;
         //    gameObject.transform.position = spawnPoint;
         //}
-         if (playerMovementScipt.playerIsDead == true)
+         if (playerMovementScript.playerIsDead == true)
         {
-            gameObject.transform.position = spawnPoint;
+            transform.position = spawnPoint;
+        }
+         if (transform.position.y < -5)
+        {
+            transform.position = spawnPoint;    
         }
     }
 
@@ -38,9 +42,15 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("CheckPoint2"))
         {
             print("new checkpoint");
-            spawnPoint = checkPoint2.transform.position;
-            
+            spawnPoint = other.transform.position;  //checkPoint2.transform.position;
+
         }
+    }
+
+     public void Respawn()
+    {
+        transform.position = spawnPoint;
+        // Additional logic to reset other necessary components or variables.
     }
 
 

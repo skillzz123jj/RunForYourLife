@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
     Animator animations;
 
+    [SerializeField] AudioSource collectibleSound;
+
+    
+
 
     void Start()
     {
@@ -48,6 +52,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+private void PlayerDeath()
+{
+    // Perform death logic
+    // ...
+
+    // Respawn the player
+    checkPointScript.Respawn();
+}
 
 
     void Update()
@@ -79,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.U))
         {
-            playerIsDead= true;
+            //playerIsDead= true;
+            PlayerDeath();
         }
         
 
@@ -148,9 +162,10 @@ public class PlayerMovement : MonoBehaviour
             
 
             print("collected");
+            collectibleSound.Play();
             fruitCollected++;
             fruitCollectedText.text = fruitCollected.ToString();
-            //collisionHappened = true;
+            
             
             
 
