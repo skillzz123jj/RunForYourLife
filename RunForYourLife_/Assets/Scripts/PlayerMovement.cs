@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,9 +16,16 @@ public class PlayerMovement : MonoBehaviour
     private InputAction movementAction;
     private InputAction jumpAction;
     Vector3 playerPosition;
+    [SerializeField] int scene;
 
+    public float totalFruitCollected;
     public float fruitCollected;
-    public TMP_Text fruitCollectedText;
+    public TMP_Text totalFruitCollectedText;
+
+    public float livesCollected;
+    public TMP_Text livesCollectedText;
+
+
     public bool isGrounded = false;
     public bool hasJumped;
     public bool playerHasLives = true;
@@ -53,13 +61,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-private void PlayerDeath()
+public void PlayerDeath()
 {
-    // Perform death logic
-    // ...
+        //If player has lives they get to respawn to their latest checkpoint if not then the game restarts
 
-    // Respawn the player
-    checkPointScript.Respawn();
+       
+        if (livesCollected > 0)
+        {
+            checkPointScript.Respawn();
+
+        }
+        else
+        {
+            SceneManager.LoadScene(scene);
+        }
+           
 }
 
 
@@ -79,15 +95,8 @@ private void PlayerDeath()
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
-        if (Input.GetAxis("Horizontal") != 0|| Input.GetAxis("Vertical") != 0)
-        {
-            animations.SetBool("Walk", true);
-
-        }
-        else
-        {
-            animations.SetBool("Walk", false);
-        }
+        PlayerAnimations();
+     
         Jump();
 
         if (Input.GetKey(KeyCode.U))
@@ -99,6 +108,20 @@ private void PlayerDeath()
 
 
     }
+
+    private void PlayerAnimations()
+    {
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            animations.SetBool("Walk", true);
+
+        }
+        else
+        {
+            animations.SetBool("Walk", false);
+        }
+
+    }
     void Jump()
     {
         if (Input.GetKey(KeyCode.Space) &&  isGrounded)
@@ -108,16 +131,13 @@ private void PlayerDeath()
             Debug.Log("Jump!");
             animations.SetBool("Jump", true);
             isGrounded = false;
-            //hasJumped = true;
-            // Add your jump code here
-            // For example, you can apply a vertical force to a Rigidbody component
-            // or change a bool variable to trigger a jump animation
+     
 
         }
         else
         {
             animations.SetBool("Jump", false);
-            // hasJumped = false;
+            
         }
 
     }
@@ -151,23 +171,22 @@ private void PlayerDeath()
         
     private void OnTriggerEnter(Collider other)
     {
-        //if (collisionHappened)
-        //{
-        //    collisionHappened = false;
-        //    return;
-        //}
-
+        // shows collected collectibles on screen and adds new lives when enough have been collected 
         if (other.CompareTag("Fruit"))
         {
             
-
             print("collected");
             collectibleSound.Play();
+            totalFruitCollected++;
             fruitCollected++;
-            fruitCollectedText.text = fruitCollected.ToString();
-            
-            
-            
+            totalFruitCollectedText.text = totalFruitCollected.ToString();
+            if (fruitCollected > 2)
+            {
+                livesCollected++;
+                livesCollectedText.text = livesCollected.ToString();
+                fruitCollected= 0;
+
+            }
 
         }
 

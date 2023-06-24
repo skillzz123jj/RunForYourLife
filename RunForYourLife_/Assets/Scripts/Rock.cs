@@ -24,8 +24,7 @@ public class Rock : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //playerMovement.GetComponent<PlayerMovement>().enabled = false;
-            //playerMovementScript.playerIsDead= true;
+          
             print("We dead");
             checkPointScript.Respawn();
             

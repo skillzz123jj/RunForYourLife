@@ -22,18 +22,15 @@ public class CheckPoint : MonoBehaviour
 
     private void Update()
     {
-        //if (playerMovementScipt.playerIsDead == true && playerMovementScipt.playerHasNoMoreLives == true)
-        //{
-        //    spawnPoint = checkPoint1.transform.position;
-        //    gameObject.transform.position = spawnPoint;
-        //}
+     
          if (playerMovementScript.playerIsDead == true)
         {
             transform.position = spawnPoint;
         }
          if (transform.position.y < -5)
         {
-            transform.position = spawnPoint;    
+             
+            playerMovementScript.PlayerDeath();
         }
     }
 
@@ -41,8 +38,9 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.CompareTag("CheckPoint2"))
         {
+            
             print("new checkpoint");
-            spawnPoint = other.transform.position;  //checkPoint2.transform.position;
+            spawnPoint = other.transform.position;  
 
         }
     }
@@ -50,7 +48,7 @@ public class CheckPoint : MonoBehaviour
      public void Respawn()
     {
         transform.position = spawnPoint;
-        // Additional logic to reset other necessary components or variables.
+      
     }
 
 
