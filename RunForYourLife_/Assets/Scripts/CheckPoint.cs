@@ -27,7 +27,7 @@ public class CheckPoint : MonoBehaviour
         {
             transform.position = spawnPoint;
         }
-         if (transform.position.y < -5)
+         if (transform.position.y < -2)
         {
              
             playerMovementScript.PlayerDeath();
@@ -50,10 +50,5 @@ public class CheckPoint : MonoBehaviour
         transform.position = spawnPoint;
       
     }
-
-
-
-
-
 }
 

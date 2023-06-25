@@ -68,6 +68,8 @@ public void PlayerDeath()
        
         if (livesCollected > 0)
         {
+            livesCollected--;
+            livesCollectedText.text = livesCollected.ToString();
             checkPointScript.Respawn();
 
         }
