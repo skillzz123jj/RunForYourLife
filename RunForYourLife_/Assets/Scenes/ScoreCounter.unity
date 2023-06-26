@@ -2261,6 +2261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalFruitCollectedText: {fileID: 411580385}
+  livesCollectedText: {fileID: 78242646}
+  completionBonusText: {fileID: 1424738827}
 --- !u!4 &1362411439
 Transform:
   m_ObjectHideFlags: 0

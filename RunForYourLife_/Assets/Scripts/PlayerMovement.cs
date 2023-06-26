@@ -75,7 +75,7 @@ public void PlayerDeath()
         }
         else
         {
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene(2);
         }
            
 }

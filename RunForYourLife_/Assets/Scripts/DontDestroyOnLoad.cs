@@ -5,7 +5,7 @@ using UnityEngine;
 public class DontDestroyOnLoad : MonoBehaviour
 {
     static DontDestroyOnLoad music;
-    // Start is called before the first frame update
+
     void Start()
     {
         if (music == null)
@@ -21,9 +21,4 @@ public class DontDestroyOnLoad : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      
-    }
 }

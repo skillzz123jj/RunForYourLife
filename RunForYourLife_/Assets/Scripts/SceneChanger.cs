@@ -5,13 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static SceneChanger levelCompleted;
+    public bool completed = false;
+
+    static SceneChanger instance;
+
     void Start()
     {
-        
+        if (instance == null)
+        {
+
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -20,6 +34,7 @@ public class SceneChanger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            completed = true;
             SceneManager.LoadScene(2);
         }
     }
