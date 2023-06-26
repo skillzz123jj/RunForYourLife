@@ -60,21 +60,18 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(StartGameWithDelay());
-    }
-
-    private IEnumerator StartGameWithDelay()
-    {
-        if (anim != null)
-        {
-            anim.SetTrigger("SeaMonster");
-        }
-        else
-        {
-            Debug.LogError("Animator component is not assigned");
-        }
-
-        yield return new WaitForSeconds(20f);
+        //StartCoroutine(StartGameWithDelay());
         SceneManager.LoadScene(scene);
     }
+
+    //private IEnumerator StartGameWithDelay()
+    //{
+    //    if (anim != null)
+    //    {
+    //        anim.SetTrigger("SeaMonster");
+    //    }
+      
+    //    yield return new WaitForSeconds(20f);
+    //    SceneManager.LoadScene(scene);
+    //}
 }

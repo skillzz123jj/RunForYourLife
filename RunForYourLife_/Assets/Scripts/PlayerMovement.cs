@@ -18,11 +18,11 @@ public class PlayerMovement : MonoBehaviour
     Vector3 playerPosition;
     [SerializeField] int scene;
 
-    public float totalFruitCollected;
+    //public float totalFruitCollected;
     public float fruitCollected;
     public TMP_Text totalFruitCollectedText;
 
-    public float livesCollected;
+    //public float livesCollected;
     public TMP_Text livesCollectedText;
 
 
@@ -66,10 +66,10 @@ public void PlayerDeath()
         //If player has lives they get to respawn to their latest checkpoint if not then the game restarts
 
        
-        if (livesCollected > 0)
+        if (ScoreData.scoreData.livesCollected > 0)
         {
-            livesCollected--;
-            livesCollectedText.text = livesCollected.ToString();
+            ScoreData.scoreData.livesCollected--;
+            livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
             checkPointScript.Respawn();
 
         }
@@ -105,6 +105,10 @@ public void PlayerDeath()
         {
             //playerIsDead= true;
             PlayerDeath();
+        }
+        if (Input.GetKey(KeyCode.M))
+        {
+            SceneManager.LoadScene(2);
         }
         
 
@@ -179,13 +183,13 @@ public void PlayerDeath()
             
             print("collected");
             collectibleSound.Play();
-            totalFruitCollected++;
+            ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
-            totalFruitCollectedText.text = totalFruitCollected.ToString();
+            totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
             if (fruitCollected > 2)
             {
-                livesCollected++;
-                livesCollectedText.text = livesCollected.ToString();
+                ScoreData.scoreData.livesCollected++;
+                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
                 fruitCollected= 0;
 
             }
