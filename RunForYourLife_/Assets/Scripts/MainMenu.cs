@@ -1,40 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEngine.SceneManagement;
-
-//public class MainMenu : MonoBehaviour
-//{
-//    [SerializeField] int scene;
-//    [SerializeField] Animator anim;
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-//        anim= GetComponent<Animator>();
-//    }
-
-//    // Update is called once per frame
-//    void Update()
-//    {
-
-//    }
-
-//    public void StartGame()
-//    {
-
-
-//        StartCoroutine(StartGameWithDelay());
-//    }
-
-//    private IEnumerator StartGameWithDelay()
-//    {
-//        anim.SetTrigger("SeaMonster");
-//        yield return new WaitForSeconds(20f);
-//        SceneManager.LoadScene(scene);
-
-//    }
-
-//}
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,4 +37,14 @@ public class MainMenu : MonoBehaviour
     //    yield return new WaitForSeconds(20f);
     //    SceneManager.LoadScene(scene);
     //}
+
+    public void RestartGame()
+    {
+        //ScoreCounter.scoreCounter.ResetScore();
+        SceneManager.LoadScene(1);
+    }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

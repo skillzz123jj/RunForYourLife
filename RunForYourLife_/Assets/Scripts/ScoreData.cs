@@ -8,6 +8,7 @@ public class ScoreData : MonoBehaviour
     public float totalFruitCollected;
     public float livesCollected;
     //public float totalScore;
+    public bool completed;
 
     public static ScoreData scoreData;
 

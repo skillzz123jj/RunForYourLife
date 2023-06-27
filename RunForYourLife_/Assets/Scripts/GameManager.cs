@@ -12,11 +12,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager manager;
 
-    //Nimi pit�� olla sama kuin LoadToLevel muuttujan arvo LoadLevel scriptiss�.
-    //Leveleiden nimet muuttujina
 
     public float totalFruitCollected;
-    public int highScore;
+    public float highScore;
 
     private void Awake()
     {
@@ -95,7 +93,7 @@ public class GameManager : MonoBehaviour
 class GameData
 {
    
-    public int highScore;
+    public float highScore;
     
 
 }

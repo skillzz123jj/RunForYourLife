@@ -18,16 +18,13 @@ public class PlayerMovement : MonoBehaviour
     Vector3 playerPosition;
     [SerializeField] int scene;
 
-    //public float totalFruitCollected;
+    
     public float fruitCollected;
     public TMP_Text totalFruitCollectedText;
-
-    //public float livesCollected;
     public TMP_Text livesCollectedText;
 
 
     public bool isGrounded = false;
-    public bool hasJumped;
     public bool playerHasLives = true;
     public bool playerIsDead = false;
     public bool playerHasNoMoreLives = false;
@@ -39,24 +36,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource collectibleSound;
 
     
-
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.drag = 5f;
+        rb.angularDrag = 5f; //Helps rotate player more smoothly
 
         animations = GetComponent<Animator>();
-
-        
-        // jumpAction = new InputAction();
-        // jumpAction.AddBinding("<Keyboard>/space");
-        // jumpAction.AddBinding("<Gamepad>/buttonSouth");
-        // jumpAction.Enable();
-        // //jumpAction.started += Jump;
-
-        rb.drag = 5f; 
-        rb.angularDrag = 5f;
-
 
     }
 
@@ -83,7 +71,15 @@ public void PlayerDeath()
 
     void Update()
     {
-      
+
+        PlayerInput();
+        PlayerAnimations();    
+        Jump();
+
+    }
+
+    private void PlayerInput()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -97,22 +93,6 @@ public void PlayerDeath()
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
-        PlayerAnimations();
-     
-        Jump();
-
-        if (Input.GetKey(KeyCode.U))
-        {
-            //playerIsDead= true;
-            PlayerDeath();
-        }
-        if (Input.GetKey(KeyCode.M))
-        {
-            SceneManager.LoadScene(2);
-        }
-        
-
-
     }
 
     private void PlayerAnimations()
@@ -130,11 +110,10 @@ public void PlayerDeath()
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) &&  isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
 
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            Debug.Log("Jump!");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);          
             animations.SetBool("Jump", true);
             isGrounded = false;
      
@@ -148,33 +127,7 @@ public void PlayerDeath()
 
     }
 
-    // void Jump(InputAction.CallbackContext context)
-    // {
-    //     if (context.started)
-    //     {
-    //         if (isGrounded && !hasJumped)                    
-    //         {
-    //             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    //             Debug.Log("Jump!");
-    //               animations.SetBool("Jump", true);
-    //             isGrounded= false;   
-    //             hasJumped = true;
-    //             // Add your jump code here
-    //             // For example, you can apply a vertical force to a Rigidbody component
-    //             // or change a bool variable to trigger a jump animation
-
-    //         }
-    //          else
-    //         {
-    //             animations.SetBool("Jump", false);
-    //         hasJumped = false;
-    //     }
-    // }
-           
-
-
-    //     }
-        
+    
     private void OnTriggerEnter(Collider other)
     {
         // shows collected collectibles on screen and adds new lives when enough have been collected 
@@ -193,6 +146,13 @@ public void PlayerDeath()
                 fruitCollected= 0;
 
             }
+
+        }
+        //Finishes the level and gives player a completion bonus
+        if (other.CompareTag("Finish"))
+        {
+            ScoreData.scoreData.completed = true;
+            SceneManager.LoadScene(2);          
 
         }
 
