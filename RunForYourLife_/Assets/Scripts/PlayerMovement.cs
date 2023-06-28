@@ -110,7 +110,7 @@ public void PlayerDeath()
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded || Input.GetKeyDown(KeyCode.JoystickButton1) && isGrounded)
         {
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);          

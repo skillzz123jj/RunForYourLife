@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
         public float speed;
+    float stop = 0;
     [SerializeField] GameObject playerMovement;
-    //public bool playerIsDead = false;
     public CheckPoint checkPointScript;
     public PlayerMovement playerMovementScript;
     
@@ -18,7 +19,9 @@ public class Rock : MonoBehaviour
     
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        AllowedToMove();
+        TakeABreak();
+        //transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -31,5 +34,22 @@ public class Rock : MonoBehaviour
         }
         
     }
+    void AllowedToMove()
+    {
+        if (checkPointScript.gameStarted == true)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            
+        }
+    }
 
+    void TakeABreak()
+    {
+        if (checkPointScript.checkPoint1Hit == true) 
+        {
+            transform.Translate(Vector2.right * stop * Time.deltaTime);
+            checkPointScript.gameStarted = false;
+
+        }
+    }
 }

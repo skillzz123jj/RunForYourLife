@@ -9,6 +9,8 @@ TagManager:
   - CheckPoint
   - CheckPoint2
   - SeaMonster
+  - StartGame
+  - EnemyPosition
   layers:
   - Default
   - TransparentFX

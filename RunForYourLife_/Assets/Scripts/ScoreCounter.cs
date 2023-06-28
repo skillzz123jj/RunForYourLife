@@ -21,7 +21,7 @@ public class ScoreCounter : MonoBehaviour
   public static ScoreCounter scoreCounter;
     void Start()
     {
-      
+        scoreCounter = this;
     }
 
     public void ResetScore()
@@ -62,8 +62,15 @@ public class ScoreCounter : MonoBehaviour
         if (GameManager.manager.highScore < totalScore)
         {
             GameManager.manager.highScore = totalScore;
+            GameManager.manager.SaveHighScore();
         }
         highScoreText.text = GameManager.manager.highScore.ToString();
-        //ResetScore();
+       
+        if (MainMenu.mainMenu.resetScore == true) 
+        {
+            
+            MainMenu.mainMenu.resetScore = false;
+        
+        }
     }
 }

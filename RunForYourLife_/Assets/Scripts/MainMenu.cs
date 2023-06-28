@@ -7,7 +7,20 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] int scene;
     private Animator anim;
+    public bool resetScore;
 
+    public static MainMenu mainMenu;
+    private void Awake()
+    {
+        if (mainMenu == null)
+        {
+            mainMenu = this; // Assign the current instance to mainMenu if it's null
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy the duplicate instance
+        }
+    }
     void Start()
     {
         GameObject objWithAnimator = GameObject.FindWithTag("SeaMonster");
@@ -41,10 +54,12 @@ public class MainMenu : MonoBehaviour
     public void RestartGame()
     {
         //ScoreCounter.scoreCounter.ResetScore();
-        SceneManager.LoadScene(1);
+        resetScore= true;
+       SceneManager.LoadScene(1);
     }
     public void BackToMenu()
     {
+        resetScore = true;
         SceneManager.LoadScene(0);
     }
 }

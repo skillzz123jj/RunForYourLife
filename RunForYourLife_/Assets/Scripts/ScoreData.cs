@@ -33,6 +33,19 @@ public class ScoreData : MonoBehaviour
    
     void Update()
     {
+        //Resets the score once player leaves the 
+        if (MainMenu.mainMenu.resetScore == true)
+        {
+            ResetScoreData();
+        }
         
+    }
+
+    void ResetScoreData()
+    {
+         totalFruitCollected = 0;
+         livesCollected = 0;
+         completed = false;
+
     }
 }

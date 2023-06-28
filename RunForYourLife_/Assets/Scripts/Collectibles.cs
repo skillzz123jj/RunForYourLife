@@ -21,8 +21,7 @@ public class Collectibles : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //GameManager.manager.highScore++;
-         
+              
             Destroy(gameObject);
 
         }

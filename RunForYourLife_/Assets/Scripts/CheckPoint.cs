@@ -7,13 +7,17 @@ public class CheckPoint : MonoBehaviour
 
     [SerializeField] GameObject checkPoint1;
     [SerializeField] GameObject checkPoint2;
+    [SerializeField] GameObject enemySpawnPoint;
+    public bool checkPoint1Hit;
     public Vector3 spawnPoint;
+    public Vector3 enemySpawnPointVector;
     public Rock rockScript;
     public PlayerMovement playerMovementScript;
+    public bool gameStarted;
 
     private void Start()
     {
-        rockScript.GetComponent<Rock>();
+        //rockScript.GetComponent<Rock>();
         playerMovementScript.GetComponent<PlayerMovement>();
 
         spawnPoint = gameObject.transform.position;
@@ -22,12 +26,8 @@ public class CheckPoint : MonoBehaviour
 
     private void Update()
     {
-     
-         if (playerMovementScript.playerIsDead == true)
-        {
-            transform.position = spawnPoint;
-        }
-         if (transform.position.y < -2)
+         
+        if (transform.position.y < -2)
         {
              
             playerMovementScript.PlayerDeath();
@@ -40,8 +40,14 @@ public class CheckPoint : MonoBehaviour
         {
             
             print("new checkpoint");
+            checkPoint1Hit = true;
+            enemySpawnPointVector = enemySpawnPoint.transform.position;
             spawnPoint = other.transform.position;  
 
+        }
+        if (other.CompareTag("StartGame"))
+        {
+            gameStarted= true;
         }
     }
 
