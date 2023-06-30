@@ -10,18 +10,18 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
-    public float speed = 1;
-    public float jumpForce;
-    public float rotationSpeed = 5f;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float rotationSpeed = 5f;
     private InputAction movementAction;
     private InputAction jumpAction;
-    Vector3 playerPosition;
-    [SerializeField] int scene;
+    private Vector3 playerPosition;
+    [SerializeField] private int scene;
 
     
     public float fruitCollected;
-    public TMP_Text totalFruitCollectedText;
-    public TMP_Text livesCollectedText;
+    [SerializeField] private TMP_Text totalFruitCollectedText;
+    [SerializeField] private TMP_Text livesCollectedText;
 
 
     public bool isGrounded = false;
@@ -35,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] AudioSource collectibleSound;
 
-    
-    
+
+    public static PlayerMovement playerMovement;
 
     void Start()
     {
@@ -108,6 +108,7 @@ public void PlayerDeath()
         }
 
     }
+
     void Jump()
     {
         if (Input.GetKey(KeyCode.Space) && isGrounded || Input.GetKeyDown(KeyCode.JoystickButton1) && isGrounded)
@@ -157,6 +158,7 @@ public void PlayerDeath()
         }
 
     }
+
     public void OnCollisionEnter(Collision collider)
     {
         if (collider.gameObject.tag == "Ground")

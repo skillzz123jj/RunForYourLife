@@ -6,14 +6,10 @@ using UnityEngine;
 public class ScoreData : MonoBehaviour
 {
     public float totalFruitCollected;
-    public float livesCollected;
-    //public float totalScore;
+    public float livesCollected;   
     public bool completed;
 
     public static ScoreData scoreData;
-
- 
-
 
     void Start()
     {
@@ -30,10 +26,9 @@ public class ScoreData : MonoBehaviour
 
     }
 
-   
     void Update()
     {
-        //Resets the score once player leaves the 
+        //Resets the score once player leaves the current scene
         if (MainMenu.mainMenu.resetScore == true)
         {
             ResetScoreData();

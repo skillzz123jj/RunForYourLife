@@ -14,11 +14,11 @@ public class MainMenu : MonoBehaviour
     {
         if (mainMenu == null)
         {
-            mainMenu = this; // Assign the current instance to mainMenu if it's null
+            mainMenu = this; 
         }
         else
         {
-            Destroy(gameObject); // Destroy the duplicate instance
+            Destroy(gameObject); 
         }
     }
     void Start()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource runningSound;
-    public PlayerMovement playerMovementScript;
+    [SerializeField] PlayerMovement playerMovementScript;
     
     void Start()
     {
@@ -15,7 +15,8 @@ public class SoundManager : MonoBehaviour
     
     void Update()
     {
-        if (playerMovementScript.isGrounded == true && Input.GetAxis("Horizontal") != 0 || playerMovementScript.isGrounded == true && Input.GetAxis("Vertical") != 0)
+        if (playerMovementScript.isGrounded == true && Input.GetAxis("Horizontal") != 0 
+            || playerMovementScript.isGrounded == true && Input.GetAxis("Vertical") != 0)
         {
             runningSound.enabled = true;
         }

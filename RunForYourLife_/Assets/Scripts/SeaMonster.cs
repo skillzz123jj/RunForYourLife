@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class SeaMonster : MonoBehaviour
 {
         public float speed;
     float stop = 0;

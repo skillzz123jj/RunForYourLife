@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking.PlayerConnection;
+
 
 public class ScoreCounter : MonoBehaviour
 {
-    
-    public TMP_Text totalFruitCollectedText;
-    public TMP_Text livesCollectedText;
-    public TMP_Text completionBonusText;
-    public TMP_Text totalScoreText;
-    public TMP_Text highScoreText;
 
-    float collectibleBonus;
-    float livesBonus;
-    float completionBonus;
-    float totalScore;
+    [SerializeField] private TMP_Text totalFruitCollectedText;
+    [SerializeField] private TMP_Text livesCollectedText;
+    [SerializeField] private TMP_Text completionBonusText;
+    [SerializeField] private TMP_Text totalScoreText;
+    [SerializeField] private TMP_Text highScoreText;
+    [SerializeField] private TMP_Text timeBonusText;
+
+    private float collectibleBonusValue;
+    private float livesBonusValue;
+    private float completionBonusValue;
+    private float totalScoreValue;
+    private float timeBonusValue;
 
   public static ScoreCounter scoreCounter;
     void Start()
@@ -26,51 +28,87 @@ public class ScoreCounter : MonoBehaviour
 
     public void ResetScore()
     {
-        collectibleBonus = 0;
-        totalFruitCollectedText.text = collectibleBonus.ToString();
-        livesBonus = 0;
-        livesCollectedText.text = livesBonus.ToString();
-        completionBonus = 0;
-        completionBonusText.text = completionBonus.ToString();
-        totalScore = 0;
-        totalScoreText.text = totalScore.ToString();
+        collectibleBonusValue = 0;
+        totalFruitCollectedText.text = collectibleBonusValue.ToString();
+        livesBonusValue = 0;
+        livesCollectedText.text = livesBonusValue.ToString();
+        completionBonusValue = 0;
+        completionBonusText.text = completionBonusValue.ToString();
+        totalScoreValue = 0;
+        totalScoreText.text = totalScoreValue.ToString();
     }
     void Update()
     {
+
+        CollectibleBonusCounter();
+        CountLivesBonus();
+        CompletionBonusCheck();
+        TimeBonusCounter();
+        TotalScoreCounter();
+        SaveHighScore();
+        CheckForScoreReset();   
+        
+    }
+    void CollectibleBonusCounter()
+    {
         //Counts all the collected collectibles and times it by 25 to get the bonus
-        collectibleBonus = ScoreData.scoreData.totalFruitCollected * 25;
-        totalFruitCollectedText.text = collectibleBonus.ToString();
+        collectibleBonusValue = ScoreData.scoreData.totalFruitCollected * 25;
+        totalFruitCollectedText.text = collectibleBonusValue.ToString();
+    }
 
+    void CountLivesBonus()
+    {
         //Counts all the extra lives and times them by 100
-        livesBonus = ScoreData.scoreData.livesCollected * 100;
-        livesCollectedText.text = livesBonus.ToString();
+        livesBonusValue = ScoreData.scoreData.livesCollected * 100;
+        livesCollectedText.text = livesBonusValue.ToString();
+    }
 
+    void CompletionBonusCheck()
+    {
         //Gives an extra 1000 completion bonus if the level was passed successfully
         if (ScoreData.scoreData.completed == true)
         {
-            completionBonus = 1000;
-            completionBonusText.text= completionBonus.ToString();
+            completionBonusValue = 1000;
+            completionBonusText.text = completionBonusValue.ToString();
         }
         else if (ScoreData.scoreData.completed == false)
         {
-            completionBonus= 0;
+            completionBonusValue = 0;
         }
+    }
 
-        totalScore = collectibleBonus + livesBonus + completionBonus;
-        totalScoreText.text = totalScore.ToString();
+    void TimeBonusCounter()
+    {
+        //Takes the time that player had left on the timer and times it by 100 to get the additional score
+        timeBonusValue = Counter.counter.counterValue * 100;
+        timeBonusText.text = timeBonusValue.ToString("F0");
+    }
 
-        if (GameManager.manager.highScore < totalScore)
+    void TotalScoreCounter()
+    {
+        //Counts all the tracked values into a total score 
+        totalScoreValue = collectibleBonusValue + livesBonusValue + completionBonusValue + timeBonusValue;
+        totalScoreText.text = totalScoreValue.ToString("F0");
+    }
+
+    void SaveHighScore()
+    {
+        //Checks if totalscore is higher then current high score if so it gets replaced
+        if (GameManager.manager.highScore < totalScoreValue)
         {
-            GameManager.manager.highScore = totalScore;
+            GameManager.manager.highScore = totalScoreValue;
             GameManager.manager.SaveHighScore();
         }
-        highScoreText.text = GameManager.manager.highScore.ToString();
-       
-        if (MainMenu.mainMenu.resetScore == true) 
+
+        highScoreText.text = ((int)GameManager.manager.highScore).ToString();
+    }
+
+    void CheckForScoreReset()
+    {
+        //Resets the resetscore bool 
+        if (MainMenu.mainMenu.resetScore == true)
         {
-            
             MainMenu.mainMenu.resetScore = false;
-        
         }
     }
 }
