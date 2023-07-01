@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     private Animator anim;
     public bool resetScore;
 
+    [SerializeField] GameObject water;
+    [SerializeField] GameObject lava;
+    [SerializeField] GameObject mainScreen;
+    [SerializeField] GameObject hardModeScreen;
+
     public static MainMenu mainMenu;
     private void Awake()
     {
@@ -61,5 +66,27 @@ public class MainMenu : MonoBehaviour
     {
         resetScore = true;
         SceneManager.LoadScene(0);
+    }
+
+    public void HardMode()
+    {
+        mainScreen.SetActive(false);
+        water.SetActive(false);
+        hardModeScreen.SetActive(true);
+        lava.SetActive(true);
+    }
+
+    public void NormalMode()
+    {
+        mainScreen.SetActive(true);
+        water.SetActive(true);
+        hardModeScreen.SetActive(false);
+        lava.SetActive(false);
+    }
+
+    public void StartHardModeGame() 
+    {
+        SceneManager.LoadScene("Scene2");
+    
     }
 }
