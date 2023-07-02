@@ -20,7 +20,8 @@ public class CheckPoint : MonoBehaviour
        playerMovementScript.GetComponent<PlayerMovement>();
 
         spawnPoint = gameObject.transform.position;
-        
+
+        StartCoroutine(FadeToBlack.fadeToBlack.SceneTransition(false));
     }
 
     private void Update()

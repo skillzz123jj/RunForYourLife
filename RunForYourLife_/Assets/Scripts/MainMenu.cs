@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] int scene;
-    private Animator anim;
+    [SerializeField] Animator anim;
     public bool resetScore;
 
     [SerializeField] GameObject water;
@@ -28,33 +28,23 @@ public class MainMenu : MonoBehaviour
     }
     void Start()
     {
-        GameObject objWithAnimator = GameObject.FindWithTag("SeaMonster");
-        if (objWithAnimator != null)
-        {
-            anim = objWithAnimator.GetComponent<Animator>();
-        }
-        else
-        {
-            Debug.LogError("Could not find object with tag 'ObjectWithTag'");
-        }
+        
     }
 
     public void StartGame()
     {
-        //StartCoroutine(StartGameWithDelay());
-        SceneManager.LoadScene(scene);
+       StartCoroutine(StartGameWithDelay());
+        StartCoroutine(FadeToBlack.fadeToBlack.SceneTransition());
+        //SceneManager.LoadScene(scene);
     }
 
-    //private IEnumerator StartGameWithDelay()
-    //{
-    //    if (anim != null)
-    //    {
-    //        anim.SetTrigger("SeaMonster");
-    //    }
-      
-    //    yield return new WaitForSeconds(20f);
-    //    SceneManager.LoadScene(scene);
-    //}
+    private IEnumerator StartGameWithDelay()
+    {
+       
+        
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scene);
+    }
 
     public void RestartGame()
     {
