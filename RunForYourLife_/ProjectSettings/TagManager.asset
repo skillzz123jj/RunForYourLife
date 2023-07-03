@@ -11,6 +11,7 @@ TagManager:
   - SeaMonster
   - StartGame
   - EnemyPosition
+  - CheckPoint3
   layers:
   - Default
   - TransparentFX

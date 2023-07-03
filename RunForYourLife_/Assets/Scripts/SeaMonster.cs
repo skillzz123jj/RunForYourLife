@@ -6,50 +6,68 @@ using UnityEngine;
 public class SeaMonster : MonoBehaviour
 {
         public float speed;
-    float stop = 0;
+    //float stop = 0;
     [SerializeField] GameObject playerMovement;
+    [SerializeField] Vector3 enemySpawnPosition;
+    [SerializeField] GameObject checkPoint2SpawnPositionEnemy;
     public CheckPoint checkPointScript;
     public PlayerMovement playerMovementScript;
+
+    public static SeaMonster seaMonster;
     
     void Start()
     {
         checkPointScript.GetComponent<CheckPoint>();
+        playerMovementScript.GetComponent<PlayerMovement>();
+        enemySpawnPosition = gameObject.transform.position;
+       
     }
 
     
     void Update()
     {
-        AllowedToMove();
-        TakeABreak();
-        //transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if (checkPointScript.moveEnemy == true)
+        {
+            AllowedToMove();
+            
+        }
+       
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if (checkPointScript.checkPoint1Hit == true)
+        {
+            enemySpawnPosition = checkPoint2SpawnPositionEnemy.transform.position;
+            gameObject.transform.position = enemySpawnPosition;
+            
+        }
+       
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-          
-            print("We dead");
-            checkPointScript.Respawn();
+            gameObject.transform.position = enemySpawnPosition;
+            Pause();
+            playerMovementScript.PlayerDeath();
             
         }
         
+        
     }
-    void AllowedToMove()
+    public void AllowedToMove()
     {
-        if (checkPointScript.gameStarted == true)
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            
-        }
+                
+         speed = 5;          
+        
     }
 
-    void TakeABreak()
-    {
-        if (checkPointScript.checkPoint1Hit == true) 
-        {
-            transform.Translate(Vector2.right * stop * Time.deltaTime);
-            checkPointScript.gameStarted = false;
+ 
 
-        }
+    public void Pause()
+    {
+
+        speed = 0;
+        //checkPointScript.moveEnemy = false;
+        
     }
+
 }

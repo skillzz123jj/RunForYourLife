@@ -58,6 +58,7 @@ public void PlayerDeath()
         {
             ScoreData.scoreData.livesCollected--;
             livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+            checkPointScript.playerIsAlive= false;
             checkPointScript.Respawn();
 
         }
