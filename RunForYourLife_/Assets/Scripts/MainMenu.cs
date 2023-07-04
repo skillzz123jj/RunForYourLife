@@ -41,8 +41,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator StartGameWithDelay()
     {
        
-        
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(scene);
     }
 

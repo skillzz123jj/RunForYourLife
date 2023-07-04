@@ -6,7 +6,7 @@ using TMPro;
 public class Counter : MonoBehaviour
 {
     [SerializeField] private TMP_Text counterText;
-    public float counterValue = 10;
+    public float counterValue = 60;
 
     public static Counter counter;
 

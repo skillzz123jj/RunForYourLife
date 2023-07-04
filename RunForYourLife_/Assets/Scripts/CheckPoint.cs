@@ -12,9 +12,11 @@ public class CheckPoint : MonoBehaviour
     public Vector3 enemySpawnPointVector;
     public PlayerMovement playerMovementScript;
     public SeaMonster seaMonsterSript;
-    public bool checkPoint1Hit;
+    public bool checkPoint2Hit;
+    public bool checkPoint3Hit;
     public bool moveEnemy;
-    public bool playerIsAlive;
+    public bool playerFell;
+    
 
     private void Start()
     {
@@ -35,6 +37,9 @@ public class CheckPoint : MonoBehaviour
         {
              
             playerMovementScript.PlayerDeath();
+            playerFell = true;
+
+         
             
         }
     }
@@ -44,36 +49,31 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("CheckPoint2"))
         {
             //Triggers a new checkpoint
-            print("new checkpoint");
-            checkPoint1Hit = true;
-            seaMonsterSript.Pause();
-            //enemySpawnPointVector = enemySpawnPoint.transform.position;
+            checkPoint2Hit = true;
             spawnPoint = other.transform.position;  
 
         }
         if (other.CompareTag("CheckPoint3"))
         {
             //Triggers a new checkpoint
-            print("new checkpoint");
-            //checkPoint1Hit = true;
-            //enemySpawnPointVector = enemySpawnPoint.transform.position;
+       
+            checkPoint3Hit = true;
             spawnPoint = other.transform.position;
 
         }
         if (other.CompareTag("StartGame"))
         {
             //Checks the bool so enemy starts moving
-            //moveEnemy = true;
+
             seaMonsterSript.AllowedToMove();
-            print("Should move now");
+            
         }
     }
 
      public void Respawn()
     {
         transform.position = spawnPoint;
-        playerIsAlive = true;
-      
+       
     }
 }
 

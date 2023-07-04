@@ -58,13 +58,14 @@ public void PlayerDeath()
         {
             ScoreData.scoreData.livesCollected--;
             livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-            checkPointScript.playerIsAlive= false;
             checkPointScript.Respawn();
+           
 
         }
         else
         {
             SceneManager.LoadScene(2);
+            StartCoroutine(FadeToBlack.fadeToBlack.SceneTransition());
         }
            
 }
@@ -153,11 +154,19 @@ public void PlayerDeath()
         //Finishes the level and gives player a completion bonus
         if (other.CompareTag("Finish"))
         {
+            StartCoroutine(FinishGameWithDelay());
             ScoreData.scoreData.completed = true;
-            SceneManager.LoadScene(2);          
+            StartCoroutine(FadeToBlack.fadeToBlack.SceneTransition());         
 
         }
 
+    }
+
+    private IEnumerator FinishGameWithDelay()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(2);
     }
 
     public void OnCollisionEnter(Collision collider)
