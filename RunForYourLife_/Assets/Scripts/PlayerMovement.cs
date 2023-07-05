@@ -142,7 +142,7 @@ public void PlayerDeath()
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            if (fruitCollected > 2)
+            if (fruitCollected > 10)
             {
                 ScoreData.scoreData.livesCollected++;
                 livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();

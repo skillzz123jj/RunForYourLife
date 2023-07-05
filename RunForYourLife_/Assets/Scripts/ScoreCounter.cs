@@ -52,7 +52,7 @@ public class ScoreCounter : MonoBehaviour
     void CollectibleBonusCounter()
     {
         //Counts all the collected collectibles and times it by 25 to get the bonus
-        collectibleBonusValue = ScoreData.scoreData.totalFruitCollected * 25;
+        collectibleBonusValue = ScoreData.scoreData.totalFruitCollected * 5;
         totalFruitCollectedText.text = collectibleBonusValue.ToString();
     }
 
@@ -79,8 +79,8 @@ public class ScoreCounter : MonoBehaviour
 
     void TimeBonusCounter()
     {
-        //Takes the time that player had left on the timer and times it by 100 to get the additional score
-        timeBonusValue = Counter.counter.counterValue * 100;
+        //Takes the time that player had left on the timer and times it by 10 to get the additional score
+        timeBonusValue = Counter.counter.counterValue * 10;
         timeBonusText.text = timeBonusValue.ToString("F0");
     }
 
