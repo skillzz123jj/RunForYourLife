@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     
     public float fruitCollected;
-    [SerializeField] private TMP_Text totalFruitCollectedText;
+    public TMP_Text totalFruitCollectedText;
     [SerializeField] private TMP_Text livesCollectedText;
 
 
@@ -59,7 +59,11 @@ public void PlayerDeath()
             ScoreData.scoreData.livesCollected--;
             livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
             checkPointScript.Respawn();
-           
+            ScoreData.scoreData.ClearTheList();
+            //ScoreData.scoreData.list = ScoreData.scoreData.collectibleList1.Count;
+            //ScoreData.scoreData.totalFruitCollected -= ScoreData.scoreData.list;
+            totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
+
 
         }
         else
@@ -71,7 +75,7 @@ public void PlayerDeath()
 }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
         PlayerInput();
@@ -79,7 +83,7 @@ public void PlayerDeath()
         Jump();
 
     }
-
+    
     private void PlayerInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -136,20 +140,41 @@ public void PlayerDeath()
         // shows collected collectibles on screen and adds new lives when enough have been collected 
         if (other.CompareTag("Fruit"))
         {
-            
+            GameObject collidedObject = other.gameObject;
+
             print("collected");
             collectibleSound.Play();
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
+            ScoreData.scoreData.collectibleList1.Add(collidedObject);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            if (fruitCollected > 10)
+            if (fruitCollected > 2)
             {
                 ScoreData.scoreData.livesCollected++;
                 livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-                fruitCollected= 0;
+                fruitCollected = 0;
 
             }
 
+            if (other.CompareTag("Fruit2"))
+            {
+                //GameObject collidedObject = other.gameObject;
+
+                print("collected");
+                collectibleSound.Play();
+                ScoreData.scoreData.totalFruitCollected++;
+                fruitCollected++;
+                //ScoreData.scoreData.fruitWave2++;
+                //ScoreData.scoreData.wave1Fruit.Add(collidedObject);
+                totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
+                if (fruitCollected > 10)
+                {
+                    ScoreData.scoreData.livesCollected++;
+                    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+                    fruitCollected = 0;
+
+                }
+            }
         }
         //Finishes the level and gives player a completion bonus
         if (other.CompareTag("Finish"))

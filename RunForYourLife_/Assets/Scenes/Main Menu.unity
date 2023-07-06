@@ -2752,6 +2752,8 @@ MonoBehaviour:
   totalFruitCollected: 0
   livesCollected: 0
   completed: 0
+  fruitWave2: 0
+  collectibleList1: []
 --- !u!4 &862869778
 Transform:
   m_ObjectHideFlags: 0

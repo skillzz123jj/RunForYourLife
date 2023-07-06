@@ -16,7 +16,8 @@ public class CheckPoint : MonoBehaviour
     public bool checkPoint3Hit;
     public bool moveEnemy;
     public bool playerFell;
-    
+
+  
 
     private void Start()
     {
