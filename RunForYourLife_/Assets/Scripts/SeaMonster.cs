@@ -36,12 +36,12 @@ public class SeaMonster : MonoBehaviour
         }
        
         transform.Translate(Vector2.right * speed * Time.deltaTime);
-        if (checkPointScript.checkPoint2Hit == true)
+        if (checkPointScript.checkPoint2ForEnemy == true)
         {
             enemySpawnPosition = checkPoint2SpawnPositionEnemy.transform.position; 
             transform.position = enemySpawnPosition;
             Pause();
-            checkPointScript.checkPoint2Hit = false;
+            checkPointScript.checkPoint2ForEnemy = false;
 
         }
         if (checkPointScript.checkPoint3Hit == true)

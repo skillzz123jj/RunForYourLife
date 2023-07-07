@@ -9,9 +9,13 @@ public class ScoreData : MonoBehaviour
     public float livesCollected;   
     public bool completed;
     public float fruitWave2;
-    public int list;
+    public int list1;
+    public int list2;
+    public int list3;
 
     public List<GameObject> collectibleList1 = new List<GameObject>();
+    public List<GameObject> collectibleList2 = new List<GameObject>();
+    public List<GameObject> collectibleList3 = new List<GameObject>();
 
     public static ScoreData scoreData;
 
@@ -37,11 +41,12 @@ public class ScoreData : MonoBehaviour
             //list = collectibleList1.Count;
             //totalFruitCollected =- list;
             print(totalFruitCollected);
+            print(list2);
            
         }
         if (Input.GetKey(KeyCode.K))
         {
-            ClearTheList();
+            ClearList1();
         }
         //Resets the score once player leaves the current scene
         if (MainMenu.mainMenu.resetScore == true)
@@ -51,13 +56,11 @@ public class ScoreData : MonoBehaviour
         
     }
 
-    public void ClearTheList()
+    public void ClearList1()
     {
-        //float list = collectibleList1.Count;
-        //totalFruitCollected = -list;
-        //PlayerMovement.playerMovement.totalFruitCollectedText.text = totalFruitCollected.ToString();
-        list = collectibleList1.Count;
-        totalFruitCollected -= list;
+      
+        list1 = collectibleList1.Count;
+        totalFruitCollected -= list1;
         foreach (GameObject collectible1 in collectibleList1)
         {
             collectible1.SetActive(true);
@@ -66,6 +69,31 @@ public class ScoreData : MonoBehaviour
         collectibleList1.Clear();
     }
 
+    public void ClearList2()
+    {
+    
+        list2 = collectibleList2.Count;
+        totalFruitCollected -= list2;
+        foreach (GameObject collectible2 in collectibleList2)
+        {
+            collectible2.SetActive(true);
+
+        }
+        collectibleList2.Clear();
+    }
+
+    public void ClearList3()
+    {
+        
+        list3 = collectibleList3.Count;
+        totalFruitCollected -= list3;
+        foreach (GameObject collectible3 in collectibleList3)
+        {
+            collectible3.SetActive(true);
+
+        }
+        collectibleList3.Clear();
+    }
 
     void ResetScoreData()
     {

@@ -59,11 +59,19 @@ public void PlayerDeath()
             ScoreData.scoreData.livesCollected--;
             livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
             checkPointScript.Respawn();
-            ScoreData.scoreData.ClearTheList();
-            //ScoreData.scoreData.list = ScoreData.scoreData.collectibleList1.Count;
-            //ScoreData.scoreData.totalFruitCollected -= ScoreData.scoreData.list;
+            if (checkPointScript.checkPoint1Hit == true)
+            {
+                ScoreData.scoreData.ClearList1();
+            }           
+            else if (checkPointScript.checkPoint2Hit == true)
+            {
+                ScoreData.scoreData.ClearList2();
+            }
+            else if (checkPointScript.checkPoint3Hit == true)
+            {
+                ScoreData.scoreData.ClearList3();
+            }
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-
 
         }
         else
@@ -140,13 +148,13 @@ public void PlayerDeath()
         // shows collected collectibles on screen and adds new lives when enough have been collected 
         if (other.CompareTag("Fruit"))
         {
-            GameObject collidedObject = other.gameObject;
+            GameObject fruit = other.gameObject;
 
             print("collected");
             collectibleSound.Play();
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
-            ScoreData.scoreData.collectibleList1.Add(collidedObject);
+            ScoreData.scoreData.collectibleList1.Add(fruit);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
             if (fruitCollected > 2)
             {
@@ -155,27 +163,28 @@ public void PlayerDeath()
                 fruitCollected = 0;
 
             }
+        }
 
-            if (other.CompareTag("Fruit2"))
+
+           else if (other.CompareTag("Fruit2"))
             {
-                //GameObject collidedObject = other.gameObject;
+                GameObject fruit2 = other.gameObject;
 
                 print("collected");
                 collectibleSound.Play();
                 ScoreData.scoreData.totalFruitCollected++;
                 fruitCollected++;
-                //ScoreData.scoreData.fruitWave2++;
-                //ScoreData.scoreData.wave1Fruit.Add(collidedObject);
+                ScoreData.scoreData.collectibleList2.Add(fruit2);
                 totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-                if (fruitCollected > 10)
-                {
-                    ScoreData.scoreData.livesCollected++;
-                    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-                    fruitCollected = 0;
+            if (fruitCollected > 2)
+            {
+                ScoreData.scoreData.livesCollected++;
+                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+                fruitCollected = 0;
 
-                }
             }
         }
+        
         //Finishes the level and gives player a completion bonus
         if (other.CompareTag("Finish"))
         {

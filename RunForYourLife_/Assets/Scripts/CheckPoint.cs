@@ -12,10 +12,12 @@ public class CheckPoint : MonoBehaviour
     public Vector3 enemySpawnPointVector;
     public PlayerMovement playerMovementScript;
     public SeaMonster seaMonsterSript;
+    public bool checkPoint1Hit = true;
     public bool checkPoint2Hit;
     public bool checkPoint3Hit;
     public bool moveEnemy;
     public bool playerFell;
+    public bool checkPoint2ForEnemy;
 
   
 
@@ -51,7 +53,11 @@ public class CheckPoint : MonoBehaviour
         {
             //Triggers a new checkpoint
             checkPoint2Hit = true;
-            spawnPoint = other.transform.position;  
+            checkPoint2ForEnemy = true;
+            print("checkpoint2");
+            checkPoint1Hit = false;
+            spawnPoint = other.transform.position;
+            
 
         }
         if (other.CompareTag("CheckPoint3"))
@@ -59,6 +65,7 @@ public class CheckPoint : MonoBehaviour
             //Triggers a new checkpoint
        
             checkPoint3Hit = true;
+            checkPoint2Hit = false;
             spawnPoint = other.transform.position;
 
         }

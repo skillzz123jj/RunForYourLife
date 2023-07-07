@@ -12,6 +12,7 @@ TagManager:
   - StartGame
   - EnemyPosition
   - CheckPoint3
+  - Fruit2
   layers:
   - Default
   - TransparentFX
