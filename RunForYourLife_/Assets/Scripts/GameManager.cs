@@ -18,14 +18,24 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        LoadHighScore();
     }
 
     void Start()
     {
-        LoadHighScore(); 
+       
+
+    }
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.G))
+        {
+            highScore = 0;
+        }
     }
 
-   
+
 
     // Save the high score to PlayerPrefs
     public void SaveHighScore()

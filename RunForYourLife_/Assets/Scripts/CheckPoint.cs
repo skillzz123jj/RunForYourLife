@@ -18,6 +18,7 @@ public class CheckPoint : MonoBehaviour
     public bool moveEnemy;
     public bool playerFell;
     public bool checkPoint2ForEnemy;
+    public bool checkPoint3ForEnemy;
 
   
 
@@ -65,7 +66,9 @@ public class CheckPoint : MonoBehaviour
             //Triggers a new checkpoint
        
             checkPoint3Hit = true;
+            checkPoint3ForEnemy = true;
             checkPoint2Hit = false;
+            //checkPoint1Hit= false;
             spawnPoint = other.transform.position;
 
         }

@@ -13,6 +13,8 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] private TMP_Text totalScoreText;
     [SerializeField] private TMP_Text highScoreText;
     [SerializeField] private TMP_Text timeBonusText;
+    [SerializeField] private TMP_Text newScoreText;
+    [SerializeField] AudioSource newHighScoreAudio;
 
     private float collectibleBonusValue;
     private float livesBonusValue;
@@ -80,8 +82,16 @@ public class ScoreCounter : MonoBehaviour
     void TimeBonusCounter()
     {
         //Takes the time that player had left on the timer and times it by 10 to get the additional score
-        timeBonusValue = Counter.counter.counterValue * 10;
-        timeBonusText.text = timeBonusValue.ToString("F0");
+        if (ScoreData.scoreData.completed == true)
+        {
+            timeBonusValue = Counter.counter.counterValue * 5;
+            timeBonusText.text = timeBonusValue.ToString("F0");
+        }
+        else
+        {
+            timeBonusValue = 0;
+        }
+        
     }
 
     void TotalScoreCounter()
@@ -96,6 +106,8 @@ public class ScoreCounter : MonoBehaviour
         //Checks if totalscore is higher then current high score if so it gets replaced
         if (GameManager.manager.highScore < totalScoreValue)
         {
+            newHighScoreAudio.Play();
+            newScoreText.gameObject.SetActive(true);
             GameManager.manager.highScore = totalScoreValue;
             GameManager.manager.SaveHighScore();
         }
@@ -108,6 +120,7 @@ public class ScoreCounter : MonoBehaviour
         //Resets the resetscore bool 
         if (MainMenu.mainMenu.resetScore == true)
         {
+            newScoreText.gameObject.SetActive(false);
             MainMenu.mainMenu.resetScore = false;
         }
     }

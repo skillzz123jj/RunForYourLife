@@ -69,6 +69,7 @@ public void PlayerDeath()
             }
             else if (checkPointScript.checkPoint3Hit == true)
             {
+                print("clear list 3");
                 ScoreData.scoreData.ClearList3();
             }
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
@@ -166,16 +167,36 @@ public void PlayerDeath()
         }
 
 
-           else if (other.CompareTag("Fruit2"))
-            {
-                GameObject fruit2 = other.gameObject;
+        else if (other.CompareTag("Fruit2"))
+        {
+            GameObject fruit2 = other.gameObject;
 
-                print("collected");
-                collectibleSound.Play();
-                ScoreData.scoreData.totalFruitCollected++;
-                fruitCollected++;
-                ScoreData.scoreData.collectibleList2.Add(fruit2);
-                totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
+            print("collected");
+            collectibleSound.Play();
+            ScoreData.scoreData.totalFruitCollected++;
+            fruitCollected++;
+            ScoreData.scoreData.collectibleList2.Add(fruit2);
+            totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
+            if (fruitCollected > 2)
+            {
+                ScoreData.scoreData.livesCollected++;
+                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+                fruitCollected = 0;
+
+            }
+
+        }
+
+        else if (other.CompareTag("Fruit3"))
+        {
+            GameObject fruit3 = other.gameObject;
+
+            print("collected");
+            collectibleSound.Play();
+            ScoreData.scoreData.totalFruitCollected++;
+            fruitCollected++;
+            ScoreData.scoreData.collectibleList3.Add(fruit3);
+            totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
             if (fruitCollected > 2)
             {
                 ScoreData.scoreData.livesCollected++;
@@ -184,9 +205,9 @@ public void PlayerDeath()
 
             }
         }
-        
-        //Finishes the level and gives player a completion bonus
-        if (other.CompareTag("Finish"))
+
+            //Finishes the level and gives player a completion bonus
+            if (other.CompareTag("Finish"))
         {
             StartCoroutine(FinishGameWithDelay());
             ScoreData.scoreData.completed = true;
