@@ -90,6 +90,8 @@ public void PlayerDeath()
         PlayerInput();
         PlayerAnimations();    
         Jump();
+        UpdateLives();
+        
 
     }
     
@@ -157,13 +159,14 @@ public void PlayerDeath()
             fruitCollected++;
             ScoreData.scoreData.collectibleList1.Add(fruit);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            if (fruitCollected > 2)
-            {
-                ScoreData.scoreData.livesCollected++;
-                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-                fruitCollected = 0;
+            //UpdateLives();
+            //if (fruitCollected > 5)
+            //{
+            //    ScoreData.scoreData.livesCollected++;
+            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+            //    fruitCollected = 0;
 
-            }
+            //}
         }
 
 
@@ -177,13 +180,13 @@ public void PlayerDeath()
             fruitCollected++;
             ScoreData.scoreData.collectibleList2.Add(fruit2);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            if (fruitCollected > 2)
-            {
-                ScoreData.scoreData.livesCollected++;
-                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-                fruitCollected = 0;
+            //if (fruitCollected > 2)
+            //{
+            //    ScoreData.scoreData.livesCollected++;
+            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+            //    fruitCollected = 0;
 
-            }
+            //}
 
         }
 
@@ -197,13 +200,13 @@ public void PlayerDeath()
             fruitCollected++;
             ScoreData.scoreData.collectibleList3.Add(fruit3);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            if (fruitCollected > 2)
-            {
-                ScoreData.scoreData.livesCollected++;
-                livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-                fruitCollected = 0;
+            //if (fruitCollected > 2)
+            //{
+            //    ScoreData.scoreData.livesCollected++;
+            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+            //    fruitCollected = 0;
 
-            }
+            //}
         }
 
             //Finishes the level and gives player a completion bonus
@@ -217,6 +220,17 @@ public void PlayerDeath()
 
     }
 
+    private void UpdateLives()
+    {
+        if (fruitCollected > 5)
+        {
+            ScoreData.scoreData.livesCollected++;
+            livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
+            fruitCollected = 0;
+
+        }
+
+    }
     private IEnumerator FinishGameWithDelay()
     {
 
