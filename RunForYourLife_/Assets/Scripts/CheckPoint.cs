@@ -41,9 +41,7 @@ public class CheckPoint : MonoBehaviour
         {
              
             playerMovementScript.PlayerDeath();
-            playerFell = true;
-
-         
+            playerFell = true;         
             
         }
     }
@@ -53,9 +51,9 @@ public class CheckPoint : MonoBehaviour
         if (other.CompareTag("CheckPoint2"))
         {
             //Triggers a new checkpoint
+
             checkPoint2Hit = true;
             checkPoint2ForEnemy = true;
-            print("checkpoint2");
             checkPoint1Hit = false;
             spawnPoint = other.transform.position;
             
@@ -68,7 +66,6 @@ public class CheckPoint : MonoBehaviour
             checkPoint3Hit = true;
             checkPoint3ForEnemy = true;
             checkPoint2Hit = false;
-            //checkPoint1Hit= false;
             spawnPoint = other.transform.position;
 
         }
@@ -83,6 +80,7 @@ public class CheckPoint : MonoBehaviour
 
      public void Respawn()
     {
+        //Sets the players position to the current checkpoint
         transform.position = spawnPoint;
        
     }

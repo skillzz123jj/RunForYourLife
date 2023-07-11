@@ -16,6 +16,7 @@ public class RainbowText : MonoBehaviour
 
     void Update()
     {
+        //Changes the text color
       
         hue += Time.deltaTime * colorChangeSpeed;
 

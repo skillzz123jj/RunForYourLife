@@ -36,18 +36,7 @@ public class ScoreData : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.L))
-        {
-            //list = collectibleList1.Count;
-            //totalFruitCollected =- list;
-            print(totalFruitCollected);
-            print(list2);
-           
-        }
-        if (Input.GetKey(KeyCode.K))
-        {
-            ClearList1();
-        }
+   
         //Resets the score once player leaves the current scene
         if (MainMenu.mainMenu.resetScore == true)
         {
@@ -58,6 +47,7 @@ public class ScoreData : MonoBehaviour
 
     public void ClearList1()
     {
+        //Clears the list the collectibles were on and brings them backs
       
         list1 = collectibleList1.Count;
         totalFruitCollected -= list1;

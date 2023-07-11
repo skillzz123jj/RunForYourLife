@@ -70,7 +70,7 @@ public class SeaMonster : MonoBehaviour
     public void AllowedToMove()
     {
                 
-        speed = 5;    
+        speed = 4;    
         checkPointScript.moveEnemy = true;
         //enemyCollider.isTrigger = true;
         

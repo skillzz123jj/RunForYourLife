@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
     {
        StartCoroutine(StartGameWithDelay());
         StartCoroutine(FadeToBlack.fadeToBlack.SceneTransition());
-        //SceneManager.LoadScene(scene);
+       
     }
 
     private IEnumerator StartGameWithDelay()
@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        //ScoreCounter.scoreCounter.ResetScore();
+        
         resetScore= true;
        SceneManager.LoadScene(1);
     }

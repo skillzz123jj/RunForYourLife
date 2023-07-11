@@ -30,9 +30,6 @@ public class PlayerMovement : MonoBehaviour
     public bool playerHasNoMoreLives = false;
 
     public CheckPoint checkPointScript;
-
-    Animator animations;
-
     [SerializeField] AudioSource collectibleSound;
 
 
@@ -44,10 +41,8 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = 5f;
         rb.angularDrag = 5f; //Helps rotate player more smoothly
 
-        animations = GetComponent<Animator>();
-
+       
     }
-
 
 public void PlayerDeath()
 {
@@ -83,16 +78,12 @@ public void PlayerDeath()
            
 }
 
-
     void FixedUpdate()
     {
-
-        PlayerInput();
-        PlayerAnimations();    
+        PlayerInput(); 
         Jump();
         UpdateLives();
         
-
     }
     
     private void PlayerInput()
@@ -112,19 +103,6 @@ public void PlayerDeath()
         }
     }
 
-    private void PlayerAnimations()
-    {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            animations.SetBool("Walk", true);
-
-        }
-        else
-        {
-            animations.SetBool("Walk", false);
-        }
-
-    }
 
     void Jump()
     {
@@ -132,16 +110,10 @@ public void PlayerDeath()
         {
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);          
-            animations.SetBool("Jump", true);
             isGrounded = false;
      
-
         }
-        else
-        {
-            animations.SetBool("Jump", false);
-            
-        }
+    
 
     }
 
@@ -152,61 +124,38 @@ public void PlayerDeath()
         if (other.CompareTag("Fruit"))
         {
             GameObject fruit = other.gameObject;
-
-            print("collected");
+         
             collectibleSound.Play();
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
             ScoreData.scoreData.collectibleList1.Add(fruit);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            //UpdateLives();
-            //if (fruitCollected > 5)
-            //{
-            //    ScoreData.scoreData.livesCollected++;
-            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-            //    fruitCollected = 0;
-
-            //}
+        
         }
 
 
         else if (other.CompareTag("Fruit2"))
         {
             GameObject fruit2 = other.gameObject;
-
-            print("collected");
+           
             collectibleSound.Play();
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
             ScoreData.scoreData.collectibleList2.Add(fruit2);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            //if (fruitCollected > 2)
-            //{
-            //    ScoreData.scoreData.livesCollected++;
-            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-            //    fruitCollected = 0;
-
-            //}
-
+          
         }
 
         else if (other.CompareTag("Fruit3"))
         {
             GameObject fruit3 = other.gameObject;
-
-            print("collected");
+           
             collectibleSound.Play();
             ScoreData.scoreData.totalFruitCollected++;
             fruitCollected++;
             ScoreData.scoreData.collectibleList3.Add(fruit3);
             totalFruitCollectedText.text = ScoreData.scoreData.totalFruitCollected.ToString();
-            //if (fruitCollected > 2)
-            //{
-            //    ScoreData.scoreData.livesCollected++;
-            //    livesCollectedText.text = ScoreData.scoreData.livesCollected.ToString();
-            //    fruitCollected = 0;
-
-            //}
+          
         }
 
             //Finishes the level and gives player a completion bonus
@@ -233,6 +182,7 @@ public void PlayerDeath()
     }
     private IEnumerator FinishGameWithDelay()
     {
+        //A slight delay when enterin a new scene so screen has time to go black
 
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(2);
