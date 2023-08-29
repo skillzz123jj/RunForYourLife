@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class SeaMonster : MonoBehaviour
 {
-        public float speed;
-    //float stop = 0;
+    public float speed;
     [SerializeField] GameObject playerMovement;
     [SerializeField] Vector3 enemySpawnPosition;
     [SerializeField] GameObject checkPoint2SpawnPositionEnemy;
@@ -21,7 +20,6 @@ public class SeaMonster : MonoBehaviour
     {
         checkPointScript.GetComponent<CheckPoint>();
         playerMovementScript.GetComponent<PlayerMovement>();
-        //enemyCollider = gameObject.GetComponent<Collider>();
         enemySpawnPosition = gameObject.transform.position;
        
     }
@@ -72,7 +70,7 @@ public class SeaMonster : MonoBehaviour
                 
         speed = 4;    
         checkPointScript.moveEnemy = true;
-        //enemyCollider.isTrigger = true;
+      
         
     }
 
@@ -83,7 +81,7 @@ public class SeaMonster : MonoBehaviour
 
         speed = 0;
         checkPointScript.moveEnemy = false;
-        //enemyCollider.isTrigger = false;
+        
         
     }
 
