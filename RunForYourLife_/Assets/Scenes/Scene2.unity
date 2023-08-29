@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1204,7 +1204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &432710006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1897,13 +1897,6 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
-    Iso: 200
-    ShutterSpeed: 0.005
-    Aperture: 16
-    BladeCount: 5
-    Curvature: {x: 2, y: 11}
-    BarrelClipping: 0.25
-    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4286,8 +4279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   playerMovement: {fileID: 1610884102}
+  enemySpawnPosition: {x: 0, y: 0, z: 0}
+  checkPoint2SpawnPositionEnemy: {fileID: 0}
+  checkPoint3SpawnPositionEnemy: {fileID: 0}
   checkPointScript: {fileID: 1610884105}
   playerMovementScript: {fileID: 1610884104}
+  enemyCollider: {fileID: 0}
 --- !u!54 &1245989765
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5311,8 +5308,14 @@ MonoBehaviour:
   spawnPoint: {x: 0, y: 0, z: 0}
   enemySpawnPointVector: {x: 0, y: 0, z: 0}
   playerMovementScript: {fileID: 1610884104}
+  seaMonsterSript: {fileID: 0}
   checkPoint1Hit: 0
-  gameStarted: 0
+  checkPoint2Hit: 0
+  checkPoint3Hit: 0
+  moveEnemy: 0
+  playerFell: 0
+  checkPoint2ForEnemy: 0
+  checkPoint3ForEnemy: 0
 --- !u!1 &1629174604
 GameObject:
   m_ObjectHideFlags: 0
